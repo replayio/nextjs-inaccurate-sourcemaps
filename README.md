@@ -1,38 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) to show an issue with next.js sourcemaps.
 
-## Getting Started
+STR:
+- `npm run build`
+- upload `.next/static/chunks/main-26f0defd1fe4aedb.js[.map]` to https://evanw.github.io/source-map-visualization/
+- select `webpack://_N_E/node_modules/@swc/helpers/esm/_interop_require_wildcard.js` as the original source
+- for comparison, upload `.next/static/chunks/pages/_app-27374a655d3a2ebe.js[.map]` to https://evanw.github.io/source-map-visualization/ and select `webpack://_N_E/src/_interop_require_wildcard.js`
 
-First, run the development server:
+Alternatively, you can look at these sourcemaps here:
+- `webpack://_N_E/node_modules/@swc/helpers/esm/_interop_require_wildcard.js`: https://app.replay.io/recording/5072126e-507f-43d9-8c9e-889ad2bfd0dd/sourcemap/o4-80-c194bb-ec5646
+- `webpack://_N_E/src/_interop_require_wildcard.js`: https://app.replay.io/recording/5072126e-507f-43d9-8c9e-889ad2bfd0dd/sourcemap/o6-6-c194bb-5d30d7
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The sourcemap viewer shows that in the first sourcemap (of a source under `node_modules`) almost all sourcemap entries point to the first column of a line in the original source. This makes it impossible to do "scope mapping" (showing scopes with original variable names) in a debugger.
